@@ -1,0 +1,26 @@
+<h2>Report di sostenibilità</h2>
+
+<div *ngFor="let report of reports" class="report-card">
+  <h3>{{ report.companyName }}</h3>
+  <p>Segmento: {{ report.segment }}</p>
+
+
+  <!-- ciclo dentro report.report -->
+   <!--p>Anno:</!--p>
+  <div-- *ngFor="let r of report.report">
+    <p>{{ r.year }} <a [href]="r.url" target="_blank" rel="noopener">Apri PDF {{ r.year }}</a></p>
+
+  </div-->
+
+ <label for="yearSelect">Seleziona anno:</label>
+  <select id="yearSelect" (change)="onYearChange($event, report.report, report.companyName)">
+    <option *ngFor="let r of report.report" [value]="r.url">{{ r.year }}</option>
+  </select>
+
+  <button (click)="downloadPDF(report.companyName)">Scarica PDF</button>
+
+</div>
+
+
+
+
