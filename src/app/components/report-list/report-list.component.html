@@ -1,10 +1,12 @@
 <div class="container py-4">
-  <h2 class="text-center mb-5">Report di sostenibilità delle aziende di abbigliamento e moda italiane</h2>
+  <h1 class="text-center mb-2">Dietro le Quinte della Moda Italiana</h1>
+  <h4 class="text-center mb-5">Report, dati e impegni green dei brand italiani che vogliono fare la differenza.</h4>
+  <h6 class="text-center mb-3">Esplora e scarica i report delle aziende italiane che stanno cambiando il modo di fare moda</h6>
 
   <div class="row">
     <!-- Colonna FAST FASHION -->
     <div class="col-md-6">
-      <h3 class="text-center mb-4">Fast Fashion</h3>
+      <h3 class="text-center mb-4"></h3>
 
       <ng-container *ngFor="let report of reports">
         <div *ngIf="report.segment === 'Fast Fashion'" class="card mb-4 shadow-sm">
@@ -45,7 +47,7 @@
 
     <!-- Colonna LUSSO -->
     <div class="col-md-6">
-      <h3 class="text-center mb-4">Lusso</h3>
+      <h3 class="text-center mb-4"></h3>
       <ng-container *ngFor="let report of reports">
         <div *ngIf="report.segment === 'Lusso'" class="card mb-4 shadow-sm">
           <div class="card-body">
