@@ -13,14 +13,19 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ReportListComponent implements OnInit {
   reports: Report[] = [];
+
+
   // Oggetto per salvare l’anno selezionato per ogni companyName
   selectedYears: { [companyName: string]: number } = {};
 
   // Stato separato per ogni azienda (per selezione anno)
   selectedUrls: { [companyName: string]: string } = {};
   selectedTitles: { [companyName: string]: string } = {};
+selectedBrandHistory: { [companyName: string]: string } = {};
+selectedBrandHistoryText: string = '';
+isModalOpen: boolean = false;
 
-  constructor(private reportService: ReportService, private http: HttpClient) {}
+  constructor(private reportService: ReportService, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.reportService.getReports().subscribe((data) => {
@@ -29,33 +34,16 @@ export class ReportListComponent implements OnInit {
 
       // Inizializza selezioni con il primo report per ogni azienda
       this.reports.forEach((report) => {
+        this.selectedBrandHistory[report.companyName] = report.brandHistory;
         const first = report.report[0];
         if (first) {
           this.selectedUrls[report.companyName] = first.url;
           this.selectedTitles[report.companyName] = first.title;
+
         }
       });
     });
   }
-
-  /*downloadPDF() {
-
-  if (this.selectedUrls) {
-    console.log("URL :", this.selectedUrls);
-    //this.reportService.downloadReport(this.currentUrl)
-
-    this.reportService.downloadReport(this.currentUrl).subscribe(blob => {
-      const downloadUrl = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = downloadUrl;
-      a.download = `${this.currentPdfTitle}.pdf`; // Usa il titolo corrente per il nome del file
-      a.click();
-      window.URL.revokeObjectURL(downloadUrl);
-    }, error => {
-      console.error("Errore nel download del file:", error);
-    });
-  }
-}*/
 
   onYearChange(event: Event, reportList: ReportDetail[], companyName: string) {
     const select = event.target as HTMLSelectElement;
@@ -72,7 +60,7 @@ export class ReportListComponent implements OnInit {
     if (!url) return;
 
     if (url.includes('monclergroup.com')) {
-       window.open(url, '_blank');
+      window.open(url, '_blank');
 
     } else {
       this.reportService.downloadReport(url).subscribe(
@@ -90,4 +78,26 @@ export class ReportListComponent implements OnInit {
       );
     }
   }
+
+  openPDF(companyName: string): void {
+    const url = this.selectedUrls[companyName];
+
+    if (!url) return;
+
+    // Alcuni siti (come Moncler) possono avere redirect particolari, quindi si apre sempre in nuova scheda
+    window.open(url, '_blank', 'noopener');
+  }
+
+
+
+openModal(report: any): void {
+  this.selectedBrandHistoryText = report.brandHistory;
+  this.isModalOpen = true;
+}
+
+closeModal(): void {
+  this.isModalOpen = false;
+}
+
+
 }

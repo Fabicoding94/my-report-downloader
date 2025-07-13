@@ -6,11 +6,13 @@ export interface ReportDetail {
   year: number;
   title: string;
   url: string;
+
 }
 
 export interface Report {
   companyName: string;
   segment: string;
+  brandHistory: string;
   report: ReportDetail[];
 }
 

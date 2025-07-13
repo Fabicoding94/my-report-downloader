@@ -1,26 +1,100 @@
-<h2>Report di sostenibilità</h2>
+<div class="container py-4">
+  <h2 class="text-center mb-5">Report di sostenibilità delle aziende di abbigliamento e moda italiane</h2>
 
-<div *ngFor="let report of reports" class="report-card">
-  <h3>{{ report.companyName }}</h3>
-  <p>Segmento: {{ report.segment }}</p>
+  <div class="row">
+    <!-- Colonna FAST FASHION -->
+    <div class="col-md-6">
+      <h3 class="text-center mb-4">Fast Fashion</h3>
+
+      <ng-container *ngFor="let report of reports">
+        <div *ngIf="report.segment === 'Fast Fashion'" class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <h4 class="card-title">
+              <a href="#" (click)="openModal(report)" data-bs-toggle="modal" data-bs-target="#brandModal">
+                {{ report.companyName }}
+              </a>
+            </h4>
+            <p class="card-subtitle mb-2 text-muted">Segmento: {{ report.segment }}</p>
+
+            <div class="row align-items-center mt-3">
+              <div class="col-12 mb-2">
+                <label for="yearSelect-{{ report.companyName }}">Seleziona anno:</label>
+                <select class="form-select" id="yearSelect-{{ report.companyName }}"
+                  (change)="onYearChange($event, report.report, report.companyName)">
+                  <option *ngFor="let r of report.report" [value]="r.url">{{ r.year }}</option>
+                </select>
+              </div>
+
+              <div class="col-6">
+                <button class="btn btn-outline-secondary w-100" (click)="openPDF(report.companyName)">
+                  <i class="bi bi-eye-fill"></i> Apri PDF
+                </button>
+              </div>
+
+              <div class="col-6">
+                <button class="btn btn-success w-100" (click)="downloadPDF(report.companyName)">
+                  <i class="bi bi-download"></i> Scarica PDF
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
 
 
-  <!-- ciclo dentro report.report -->
-   <!--p>Anno:</!--p>
-  <div-- *ngFor="let r of report.report">
-    <p>{{ r.year }} <a [href]="r.url" target="_blank" rel="noopener">Apri PDF {{ r.year }}</a></p>
+    <!-- Colonna LUSSO -->
+    <div class="col-md-6">
+      <h3 class="text-center mb-4">Lusso</h3>
+      <ng-container *ngFor="let report of reports">
+        <div *ngIf="report.segment === 'Lusso'" class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <h4 class="card-title">
+              <a href="#" (click)="openModal(report)" data-bs-toggle="modal" data-bs-target="#brandModal">
+                {{ report.companyName }}
+              </a>
+            </h4>
+            <p class="card-subtitle mb-2 text-muted">Segmento: {{ report.segment }}</p>
 
-  </div-->
+            <div class="row align-items-center mt-3">
+              <div class="col-12 mb-2">
+                <label for="yearSelect-{{ report.companyName }}">Seleziona anno:</label>
+                <select class="form-select" id="yearSelect-{{ report.companyName }}"
+                  (change)="onYearChange($event, report.report, report.companyName)">
+                  <option *ngFor="let r of report.report" [value]="r.url">{{ r.year }}</option>
+                </select>
+              </div>
 
- <label for="yearSelect">Seleziona anno:</label>
-  <select id="yearSelect" (change)="onYearChange($event, report.report, report.companyName)">
-    <option *ngFor="let r of report.report" [value]="r.url">{{ r.year }}</option>
-  </select>
+              <div class="col-6">
+                <button class="btn btn-outline-secondary w-100" (click)="openPDF(report.companyName)">
+                  <i class="bi bi-eye-fill"></i> Apri PDF
+                </button>
+              </div>
 
-  <button (click)="downloadPDF(report.companyName)">Scarica PDF</button>
+              <div class="col-6">
+                <button class="btn btn-success w-100" (click)="downloadPDF(report.companyName)">
+                  <i class="bi bi-download"></i> Scarica PDF
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
 
+    </div>
+  </div>
+
+
+  <div *ngIf="isModalOpen" class="modal-overlay">
+  <div class="modal-content">
+    <h2>Storia del brand</h2>
+    <p>{{ selectedBrandHistoryText }}</p>
+    <button class="btn btn-success w-100" (click)="closeModal()">
+      Chiudi
+    </button>
+  </div>
 </div>
 
 
 
-
+</div>
