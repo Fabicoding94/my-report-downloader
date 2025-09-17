@@ -1,1 +1,334 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* ==== Theme tokens ==== */
+:root{
+  --brand:#178a3a;
+  --brand-600:#127232;
+  --brand-100:#eaf7ef;
+  --brand-50:#f4fbf6;
+
+  --ink:#1f2937;
+  --muted:#64748b;
+  --ring:#dbe5d5;
+
+  --surface:#ffffff;
+  --surface-2:#f8faf9;
+  --shadow: 0 6px 20px rgba(16, 185, 129, .08);
+}
+
+/* ==== Base ==== */
+body{ color:var(--ink); background:linear-gradient(180deg,#f6fbf7, #ffffff 360px); }
+h1,h2,h3{ font-weight:800; letter-spacing:.2px; }
+.text-muted{ color:var(--muted)!important; }
+
+/* ==== Hero ==== */
+.hero {
+  background: radial-gradient(90% 120% at 0% 0%, var(--brand-50) 0%, #fff 60%);
+  border:1px solid var(--ring); border-radius:16px; padding:40px 24px; margin-bottom:32px;
+}
+.hero-badge{
+  display:inline-flex; gap:8px; align-items:center;
+  background:var(--brand-100); border:1px solid var(--ring);
+  padding:8px 14px; border-radius:999px; font-weight:600; color:var(--brand-600);
+}
+
+/* ==== Card brand ===========================================================
+   Componente contenitore per ogni brand: sfondo chiaro, bordo leggero e
+   ombra “soft” per staccare dal background senza risultare invasivo.
+   Usa i design token definiti in :root (var(--surface), --ring, --shadow).
+=========================================================================== */
+.brand-card{
+  background: var(--surface);          /* superficie base (di solito #fff) */
+  border: 1px solid var(--ring);       /* bordo leggero, colore neutro del tema */
+  border-radius: 18px;                 /* angoli molto arrotondati: look “morbido” */
+  box-shadow: var(--shadow);           /* ombra soft (profondità minima) */
+  padding: 20px;                       /* respiro interno uniforme */
+}
+
+/* Variante evidenziata (opzionale):
+   Leggero gradiente e bordo più “verde” per sottolineare featured/suggestion. */
+.brand-card.highlight{
+  background: linear-gradient(180deg, #f3fcf6, #fff);  /* tinta verde tenue → bianco */
+  border-color: #cfe9d7;                               /* bordo coerente con il gradiente */
+}
+
+/* Header della card:
+   Layout orizzontale con icona a sinistra e titolo/badge a destra. */
+.brand-card .header{
+  display: flex;                     /* disposizione orizzontale dei figli */
+  align-items: center;               /* allinea verticalmente icona e testo */
+  gap: 12px;                         /* spazio costante tra icona e contenuto */
+  margin-bottom: 8px;                /* separazione dal paragrafo successivo */
+}
+
+/* “Dot” dell’icona:
+   Quadrato arrotondato (12px) che ospita l’icona del brand.
+   Grid+place-items:center garantiscono centratura perfetta anche con SVG. */
+.brand-card .brand-dot{
+  width: 44px; height: 44px;         /* dimensioni touch-friendly */
+  border-radius: 12px;               /* angoli tondi→ estetica coerente col resto */
+  display: grid;                     /* layout grid per centratura semplice */
+  place-items: center;               /* centra sia orizzontalmente che verticalmente */
+  background: var(--brand-100);      /* tinta chiara del brand (verde molto tenue) */
+  color: var(--brand-600);           /* colore dell’icona (verde più saturo) */
+  font-size: 22px;                   /* dimensione icona/font (bi, fa, svg currentColor) */
+}
+
+/* Badge “soft”:
+   Pillola per il segmento (es. Fast Fashion/Lusso). Bordi e colori delicati
+   per non sovraccaricare la gerarchia visiva rispetto al titolo. */
+.badge-soft{
+  background: var(--surface-2);      /* superficie secondaria (grigio molto chiaro) */
+  border: 1px solid var(--ring);     /* bordo leggero, coerenza con la card */
+  border-radius: 999px;              /* forma “pill” (capsula) */
+  padding: 4px 10px;                 /* spazio interno: compatto ma leggibile */
+  font-size: .75rem;                 /* dimensione testo ridotta (sottotono) */
+  font-weight: 600;                  /* un po’ di enfasi per la leggibilità */
+  color: #334155;                    /* tinta scura neutra: buon contrasto sul bg chiaro */
+}
+
+/* KPI / claim pill */
+.kpi-pill{
+  background:var(--brand-50); border:1px solid #d7eddc; color:var(--brand-600);
+  padding:8px 12px; border-radius:10px; font-weight:600; font-size:.9rem;
+}
+
+/* ==== Controls ==== */
+.select-soft.form-select{
+  border-radius:12px; border:1px solid var(--ring); background-color:#fff;
+  padding:.6rem .9rem; box-shadow:none;
+}
+.btn-pill{ border-radius:999px; padding:.6rem 1rem; font-weight:700; }
+.btn-brand{ background:var(--brand); border-color:var(--brand); color:#fff; }
+.btn-brand:hover{ background:var(--brand-600); border-color:var(--brand-600); }
+.btn-ghost{ background:#fff; border:1px solid var(--ring); color:#0f172a; }
+.btn-ghost:hover{ background:var(--surface-2); }
+.btn i.bi{ font-size:1rem; margin-right:.4rem; }
+
+.rounded-18{ border-radius:18px; }
+.shadow-soft{ box-shadow:var(--shadow); }
+
+
+/* ==== Feature cards (3 in alto) ==== */
+.feature-card {
+  border: 1px solid var(--ring);
+  background: var(--surface);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(16,185,129,0.15);
+}
+.feature-icon {
+  font-size: 2rem;
+  color: var(--brand-600);
+}
+
+/* ==== Stat boxes (Impatto in numeri) ==== */
+.stat-box {
+  border: 1px solid var(--ring);
+  background: var(--surface-2);
+}
+.text-purple {
+  color: #6f42c1;
+}
+
+/* ===== HERO XL (full-bleed, stile mock 2) ===== */
+.hero{
+  /* fascia ampia chiara, non più "card" */
+  background: radial-gradient(120% 120% at 0% 0%, var(--brand-50) 0%, #ffffff 65%);
+  border: 0; border-radius: 0; margin: 0;
+}
+
+
+/* estendi lo sfondo da bordo a bordo, anche se il resto è in .container */
+.hero-fullbleed{
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+/* badge centrale */
+.hero-badge{
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--brand-100); border:1px solid var(--ring);
+  padding:10px 16px; border-radius:999px; font-weight:700; color:var(--brand-600);
+}
+
+
+/* Titolo XL su due righe + parola evidenziata */
+.hero-title{
+  font-weight: 900;
+  letter-spacing:-0.02em;
+  line-height:1.05;
+  /* più grande del precedente */
+  font-size: clamp(2.4rem, 5vw + 0.5rem, 5.25rem);
+  margin: 18px 0 8px;
+  max-width: 1100px;     /* aiuta a fare due righe “belle” su desktop */
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero-title .accent{
+  color: var(--brand);
+  text-decoration: underline;
+  text-decoration-thickness: 8px;   /* più spessa, come nel mock */
+  text-underline-offset: 12px;
+}
+
+/* lead più ampio e centrato (correzione della riga rotta) */
+.hero-lead{
+  max-width: min(1000px, 92%);
+  font-size: clamp(1.05rem, 0.7vw + 1rem, 1.35rem);
+  color: var(--ink);
+  opacity: .9;
+  margin-top: 30px;
+}
+
+
+/* CTA più corpose */
+.hero-ctas .btn{ padding:.9rem 1.15rem; font-size:1.05rem; }
+
+/* chip “Aggiornato 2024” in alto a destra della hero */
+.hero-updated{ position:absolute; top:8px; right:12px; }
+
+/* piccolo respiro tra hero e la sezione successiva */
+.row.g-4:first-of-type{ margin-top:24px; }
+
+/* ritocchi per avvicinarsi al mock */
+.feature-card{ padding:28px; }           /* più corpose */
+.feature-icon{ font-size:2.2rem; }       /* icone più grandi */
+.stat-box .feature-icon{ font-size:2rem; }
+.stat-box h3{ font-size:clamp(1.5rem,1vw + 1rem,2rem); }
+
+/* smooth scroll e offset dell’ancora brand */
+html { scroll-behavior: smooth; }
+.brand-anchor { scroll-margin-top: 80px; } /* regola se hai una navbar fissa */
+
+
+/* ===== Featured cards ===== */
+.featured-card { border-width: 1px; }
+.featured-card .header { margin-bottom: 10px; }
+
+/* temi di sfondo (puoi regolarli) */
+.theme-mint  { background: linear-gradient(180deg, #eaf7ef, #ffffff 70%); border-color:#cfe9d7; }
+.theme-sage  { background: linear-gradient(180deg, #eefaf1, #ffffff 70%); border-color:#d5eedb; }
+.theme-blue  { background: linear-gradient(180deg, #eaf1ff, #ffffff 70%); border-color:#cfe1ff; }
+
+/* angolo decorativo */
+.featured-card{
+  position: relative;         /* già hai la utility, va bene anche qui */
+  overflow: hidden;           /* <— taglia tutto ciò che esce */
+  border-radius: 18px;        /* coerente con la tua .rounded-18 */
+}
+
+/* il cerchietto (puoi togliere content:, non serve su un <div>) */
+.featured-card .corner-decor{
+  position: absolute;
+  right: -39px; top: -30px;
+  width: 105px; height: 105px; border-radius: 999px;
+  background: rgba(255,255,255,.6);
+  border: 1px solid #e6eef5;
+}
+
+/* titolo + testo della sezione */
+section .display-5 { letter-spacing: -0.02em; }
+
+.brand-card{
+  transition: transform .18s ease, box-shadow .18s ease;
+  will-change: transform;
+}
+
+.brand-card:hover,
+.brand-card:focus-within{       /* accessibile anche via tastiera */
+  transform: translateY(-6px);  /* si sposta leggermente in alto */
+  box-shadow: 0 14px 28px rgba(16,24,40,.14), 0 8px 10px rgba(16,24,40,.08);
+}
+
+/*Stile per il pop del Resoconto ultimo Report*/
+.modal-backdrop{
+  position: fixed; inset: 0; background: rgba(15,23,42,.45);
+  backdrop-filter: blur(2px);
+  z-index: 1040;
+}
+
+.modal-card{
+  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: min(680px, 92vw); max-height: 80vh; overflow: auto;
+  background: #fff; border-radius: 18px;
+  box-shadow: 0 24px 48px rgba(16,24,40,.18), 0 8px 16px rgba(16,24,40,.10);
+  z-index: 1050;
+  display: flex; flex-direction: column;
+}
+
+.btn-close{
+  border: 0; background: transparent; width: 36px; height: 36px;
+  mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.72 3.72a.75.75 0 011.06 0L8 6.94l3.22-3.22a.75.75 0 111.06 1.06L9.06 8l3.22 3.22a.75.75 0 11-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 11-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 010-1.06z'/%3E%3C/svg%3E") center/18px 18px no-repeat;
+  background-color: #334155; border-radius: 8px;
+}
+.btn-close:hover{ background-color: #0f172a; }
+
+
+/* header/footer fissi, body scrollabile */
+.modal-header, .modal-footer{ padding:16px 20px; }
+
+.modal-overlay{
+  position: fixed; inset: 0;
+  background: rgba(15,23,42,.45);
+  backdrop-filter: blur(2px);
+  z-index: 1040;
+}
+
+.modal-content{
+  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: min(900px, 94vw);     /* più largo */
+  max-height: 85vh;            /* limite verticale */
+  background: #fff; border-radius: 18px;
+  box-shadow: 0 24px 48px rgba(16,24,40,.18), 0 8px 16px rgba(16,24,40,.10);
+  z-index: 1050;
+
+  display: flex;               /* header fisso + body scroll */
+  flex-direction: column;
+  overflow: hidden;            /* nasconde bordi, non il body */
+  box-sizing: border-box;
+}
+
+
+.modal-body{
+  padding: 16px 20px;
+  flex: 1 1 auto;              /* occupa lo spazio restante */
+  overflow-y: auto;            /* ← SCROLLBAR QUI */
+  -webkit-overflow-scrolling: touch;
+}
+
+.summary-text{
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;     /* evita parole/URL che “bucano” il layout */
+}
+
+/* opzionale: stile scrollbar */
+.modal-body::-webkit-scrollbar{ width: 10px; }
+.modal-body::-webkit-scrollbar-thumb{ background:#cbd5e1; border-radius: 8px; }
+
+/* --- SOLO per il popup Resoconto --- */
+.modal-content--summary{
+  width: min(1000px, 96vw) !important;  /* più largo su desktop */
+  max-width: none !important;           /* annulla eventuali max-width ereditati */
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.modal-content--summary .modal-body{
+  padding: 16px 20px;
+  overflow-y: auto;                      /* scrollbar interna */
+  -webkit-overflow-scrolling: touch;
+  max-height: calc(85vh - 110px);        /* spazio per header/footer */
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* opzionale: su schermi piccoli lascia 96vw */
+@media (max-width: 991.98px){
+  .modal-content--summary{ width: 96vw !important; }
+}
+

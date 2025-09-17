@@ -1,102 +1,210 @@
 <div class="container py-4">
-  <h1 class="text-center mb-2">Dietro le Quinte della Moda Italiana</h1>
-  <h4 class="text-center mb-5">Report, dati e impegni green dei brand italiani che vogliono fare la differenza.</h4>
-  <h6 class="text-center mb-3">Esplora e scarica i report delle aziende italiane che stanno cambiando il modo di fare moda</h6>
+  <!-- HERO XL -->
+  <section class="hero hero-xl hero-fullbleed text-center">
+    <div class="container-xxl position-relative">
+      <div class="hero-badge mx-auto">
+        <i class="bi bi-leaf"></i>
+        Sostenibilità nella Moda Italiana
+        <i class="bi bi-stars ms-1"></i>
+      </div>
 
-  <div class="row">
-    <!-- Colonna FAST FASHION -->
-    <div class="col-md-6">
-      <h3 class="text-center mb-4"></h3>
+      <h1 class="hero-title mt-4">
+        Il Futuro della Moda è
+        <br class="d-none d-lg-block" />
+        <span class="accent">Sostenibile</span>
+      </h1>
 
-      <ng-container *ngFor="let report of reports">
-        <div *ngIf="report.segment === 'Fast Fashion'" class="card mb-4 shadow-sm">
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#" (click)="openModal(report)" data-bs-toggle="modal" data-bs-target="#brandModal">
-                {{ report.companyName }}
-              </a>
-            </h4>
-            <p class="card-subtitle mb-2 text-muted">Segmento: {{ report.segment }}</p>
+      <p class="lead hero-lead mx-auto">
+        Esplora i report di sostenibilità delle principali aziende di moda
+        italiane. Confronta performance, monitora i progressi e scopri come il
+        settore evolve verso pratiche più responsabili.
+      </p>
 
-            <div class="row align-items-center mt-3">
-              <div class="col-12 mb-2">
-                <label for="yearSelect-{{ report.companyName }}">Seleziona anno:</label>
-                <select class="form-select" id="yearSelect-{{ report.companyName }}"
-                  (change)="onYearChange($event, report.report, report.companyName)">
-                  <option *ngFor="let r of report.report" [value]="r.url">{{ r.year }}</option>
-                </select>
-              </div>
+      <!-- chip “Aggiornato 2024” in alto a destra della hero -->
+      <span class="badge-soft hero-updated">Aggiornato 2024</span>
 
-              <div class="col-6">
-                <button class="btn btn-outline-secondary w-100" (click)="openPDF(report.companyName)">
-                  <i class="bi bi-eye-fill"></i> Apri PDF
-                </button>
-              </div>
+      <div class="hero-ctas mt-4 d-flex justify-content-center gap-3">
+        <button class="btn btn-brand btn-pill" (click)="scrollToBrands()">
+          <i class="bi bi-eye"></i> Esplora Report
+        </button>
+        <button class="btn btn-ghost btn-pill" (click)="scrollToBrands()">
+          <i class="bi bi-download"></i> Scarica Analisi
+        </button>
+      </div>
+    </div>
+  </section>
 
-              <div class="col-6">
-                <button class="btn btn-success w-100" (click)="downloadPDF(report.companyName)">
-                  <i class="bi bi-download"></i> Scarica PDF
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </ng-container>
+  <!-- SEZIONE FUNZIONALITÀ -->
+  <div class="row g-4 my-5 text-center">
+    <div class="col-md-4">
+      <div class="feature-card p-4 rounded-18 shadow-soft h-100">
+        <i class="bi bi-bar-chart-fill feature-icon"></i>
+        <h5 class="mt-3">Analisi Comparative</h5>
+        <p class="text-muted small mb-0">
+          Confronta le performance di sostenibilità tra diversi brand e settori
+        </p>
+      </div>
     </div>
 
+    <div class="col-md-4">
+      <div class="feature-card p-4 rounded-18 shadow-soft h-100">
+        <i class="bi bi-bullseye feature-icon"></i>
+        <h5 class="mt-3">Obiettivi Tracciati</h5>
+        <p class="text-muted small mb-0">
+          Monitora il progresso verso gli obiettivi di sostenibilità aziendali
+        </p>
+      </div>
+    </div>
 
-    <!-- Colonna LUSSO -->
-    <div class="col-md-6">
-      <h3 class="text-center mb-4"></h3>
-      <ng-container *ngFor="let report of reports">
-        <div *ngIf="report.segment === 'Lusso'" class="card mb-4 shadow-sm">
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#" (click)="openModal(report)" data-bs-toggle="modal" data-bs-target="#brandModal">
-                {{ report.companyName }}
-              </a>
-            </h4>
-            <p class="card-subtitle mb-2 text-muted">Segmento: {{ report.segment }}</p>
-
-            <div class="row align-items-center mt-3">
-              <div class="col-12 mb-2">
-                <label for="yearSelect-{{ report.companyName }}">Seleziona anno:</label>
-                <select class="form-select" id="yearSelect-{{ report.companyName }}"
-                  (change)="onYearChange($event, report.report, report.companyName)">
-                  <option *ngFor="let r of report.report" [value]="r.url">{{ r.year }}</option>
-                </select>
-              </div>
-
-              <div class="col-6">
-                <button class="btn btn-outline-secondary w-100" (click)="openPDF(report.companyName)">
-                  <i class="bi bi-eye-fill"></i> Apri PDF
-                </button>
-              </div>
-
-              <div class="col-6">
-                <button class="btn btn-success w-100" (click)="downloadPDF(report.companyName)">
-                  <i class="bi bi-download"></i> Scarica PDF
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </ng-container>
-
+    <div class="col-md-4">
+      <div class="feature-card p-4 rounded-18 shadow-soft h-100">
+        <i class="bi bi-globe2 feature-icon"></i>
+        <h5 class="mt-3">Impatto Globale</h5>
+        <p class="text-muted small mb-0">
+          Visualizza l'impatto ambientale e sociale su scala internazionale
+        </p>
+      </div>
     </div>
   </div>
 
+  <!-- IMPATTO IN NUMERI -->
+  <div class="text-center my-5">
+    <h2 class="fw-bold mb-2">Impatto in Numeri</h2>
+    <p class="text-muted mb-5">
+      I risultati concreti del movimento verso la sostenibilità
+    </p>
 
+    <div class="row g-4">
+      <div class="col-6 col-md-3">
+        <div class="stat-box p-4 rounded-18 h-100">
+          <i class="bi bi-graph-up feature-icon text-success"></i>
+          <h3 class="fw-bold mt-2">+45%</h3>
+          <p class="small text-muted mb-0">
+            Crescita Sostenibilità<br />negli ultimi 3 anni
+          </p>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="stat-box p-4 rounded-18 h-100">
+          <i class="bi bi-people feature-icon text-primary"></i>
+          <h3 class="fw-bold mt-2">50+</h3>
+          <p class="small text-muted mb-0">
+            Brand Monitorati<br />aziende italiane
+          </p>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="stat-box p-4 rounded-18 h-100">
+          <i class="bi bi-award feature-icon text-purple"></i>
+          <h3 class="fw-bold mt-2">200+</h3>
+          <p class="small text-muted mb-0">
+            Report Pubblicati<br />documenti analizzati
+          </p>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="stat-box p-4 rounded-18 h-100">
+          <i class="bi bi-leaf feature-icon text-success"></i>
+          <h3 class="fw-bold mt-2">-30%</h3>
+          <p class="small text-muted mb-0">
+            Impatto Ambientale<br />riduzione media CO₂
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BRAND IN EVIDENZA -->
+<section class="container my-5">
+  <h2 class="display-5 fw-bold text-center mb-2">Brand in Evidenza</h2>
+  <p class="text-center text-muted mb-4">
+    Accedi ai report di sostenibilità dei principali marchi italiani e scopri le loro iniziative
+    innovative per un futuro più verde e responsabile.
+  </p>
+
+  <div class="row g-4 brand-anchor" #brandsSection id="brands">
+    <div class="col-12 col-md-6 col-lg-4" *ngFor="let r of getFeatured()">
+      <div class="brand-card featured-card rounded-18 shadow-soft position-relative" [ngClass]="getThemeClass(r)">
+        <div class="corner-decor"></div>
+
+        <div class="header">
+          <div class="brand-dot"><i class="bi" [ngClass]="(brandMeta[r.companyName]?.icon || 'bi-building')"></i></div>
+          <div class="flex-fill">
+            <h3 class="h5 mb-1"><a href="#" (click)="openModal(r)">{{ r.companyName }}</a></h3>
+            <span class="badge-soft">{{ r.segment }}</span>
+          </div>
+        </div>
+
+        <p class="text-muted mb-3">
+          {{ r.brandHistory | slice:0:160 }}<span *ngIf="(r.brandHistory?.length || 0) > 160">…</span>
+        </p>
+
+        <div class="kpi-pill mb-3" *ngIf="brandMeta[r.companyName]?.kpi as kpi">{{ kpi }}</div>
+
+        <div class="mb-3">
+          <label class="form-label small text-muted mb-1">Seleziona anno:</label>
+          <select class="form-select select-soft" (change)="onYearChange($event, r.report, r.companyName)">
+            <option *ngFor="let d of getSorted(r.report)" [value]="d.url">Report {{ d.year }}</option>
+          </select>
+        </div>
+
+        <div class="d-flex gap-2 mb-2">
+          <button class="btn btn-ghost btn-pill w-50" (click)="openPDF(r.companyName)">
+            <i class="bi bi-eye"></i> Anteprima
+          </button>
+          <button class="btn btn-brand btn-pill w-50" (click)="downloadPDF(r.companyName)">
+            <i class="bi bi-download"></i> Scarica PDF
+          </button>
+        </div>
+
+        <div>
+           <button class="btn btn-ghost btn-pill w-100" (click)="openLastReportSummary(r.companyName)">
+            <i class="bi bi-file-text"></i> Resoconto ultimo report
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+  <!-- MODALE TESTO -->
   <div *ngIf="isModalOpen" class="modal-overlay">
-  <div class="modal-content">
-    <h2>Storia del brand</h2>
-    <p>{{ selectedBrandHistoryText }}</p>
-    <button class="btn btn-success w-100" (click)="closeModal()">
-      Chiudi
-    </button>
+    <div class="modal-content">
+      <h2>Storia del brand</h2>
+      <p>{{ selectedBrandHistoryText }}</p>
+      <button class="btn btn-brand btn-pill w-100" (click)="closeModal()">
+        Chiudi
+      </button>
+    </div>
   </div>
-</div>
 
+<!-- MODALE RESOCONTO -->
+<div *ngIf="isSummaryOpen" class="modal-overlay" (click)="closeSummary()"></div>
+
+<div *ngIf="isSummaryOpen" class="modal-content modal-content--summary" role="dialog" aria-modal="true" aria-labelledby="summaryTitle">
+  <div class="modal-header d-flex align-items-center justify-content-between">
+    <h2 id="summaryTitle" class="h5 mb-0">
+      {{ summaryTitle }} – {{ summaryCompany }}
+    </h2>
+    <button class="btn btn-ghost btn-pill" (click)="closeSummary()">Chiudi</button>
+  </div>
+
+  <div class="modal-body">
+    <div *ngIf="summaryLoading">Caricamento…</div>
+    <div *ngIf="summaryError" class="text-danger">Errore nel caricamento del resoconto.</div>
+    <div *ngIf="!summaryLoading && !summaryError" class="summary-text">
+      {{ summaryText }}
+    </div>
+  </div>
+
+  <div class="modal-footer d-none"></div>
+</div>
 
 
 </div>
